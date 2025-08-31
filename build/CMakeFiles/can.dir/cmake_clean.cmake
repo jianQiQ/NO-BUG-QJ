@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/can.dir/Src/can.c.obj"
+  "CMakeFiles/can.dir/Src/can.c.obj.d"
+  "CMakeFiles/can.dir/Src/dma.c.obj"
+  "CMakeFiles/can.dir/Src/dma.c.obj.d"
+  "CMakeFiles/can.dir/Src/gpio.c.obj"
+  "CMakeFiles/can.dir/Src/gpio.c.obj.d"
+  "CMakeFiles/can.dir/Src/main.c.obj"
+  "CMakeFiles/can.dir/Src/main.c.obj.d"
+  "CMakeFiles/can.dir/Src/stm32f4xx_hal_msp.c.obj"
+  "CMakeFiles/can.dir/Src/stm32f4xx_hal_msp.c.obj.d"
+  "CMakeFiles/can.dir/Src/stm32f4xx_it.c.obj"
+  "CMakeFiles/can.dir/Src/stm32f4xx_it.c.obj.d"
+  "CMakeFiles/can.dir/Src/syscalls.c.obj"
+  "CMakeFiles/can.dir/Src/syscalls.c.obj.d"
+  "CMakeFiles/can.dir/Src/sysmem.c.obj"
+  "CMakeFiles/can.dir/Src/sysmem.c.obj.d"
+  "CMakeFiles/can.dir/Src/tim.c.obj"
+  "CMakeFiles/can.dir/Src/tim.c.obj.d"
+  "CMakeFiles/can.dir/Src/usart.c.obj"
+  "CMakeFiles/can.dir/Src/usart.c.obj.d"
+  "CMakeFiles/can.dir/application/CAN_receive.c.obj"
+  "CMakeFiles/can.dir/application/CAN_receive.c.obj.d"
+  "CMakeFiles/can.dir/application/mecanum_control.c.obj"
+  "CMakeFiles/can.dir/application/mecanum_control.c.obj.d"
+  "CMakeFiles/can.dir/application/ps2.c.obj"
+  "CMakeFiles/can.dir/application/ps2.c.obj.d"
+  "CMakeFiles/can.dir/bsp/boards/bsp_can.c.obj"
+  "CMakeFiles/can.dir/bsp/boards/bsp_can.c.obj.d"
+  "CMakeFiles/can.dir/bsp/boards/pid.c.obj"
+  "CMakeFiles/can.dir/bsp/boards/pid.c.obj.d"
+  "CMakeFiles/can.dir/startup_stm32f407xx.s.obj"
+  "can.map"
+  "can.exe"
+  "can.exe.manifest"
+  "can.pdb"
+  "libcan.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang ASM C)
+  include(CMakeFiles/can.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
