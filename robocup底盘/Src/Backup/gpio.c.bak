@@ -49,7 +49,17 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOH, ledR_Pin|ledG_Pin|ledB_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, CS_Pin|CLK_Pin|CMD_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PHPin PHPin PHPin */
+  GPIO_InitStruct.Pin = ledR_Pin|ledG_Pin|ledB_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin PBPin */
   GPIO_InitStruct.Pin = CS_Pin|CLK_Pin|CMD_Pin;

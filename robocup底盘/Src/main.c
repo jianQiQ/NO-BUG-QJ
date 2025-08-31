@@ -80,9 +80,10 @@ void UART1_Send_IT(uint8_t *buf, uint16_t len);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-  uint8_t move_mode = 0; // 移动模式标志
-	int ai=1;
+  //uint8_t move_mode = 0; // 移动模式标志
   uint8_t pid_flag = 0; // PID标志
+  static uint8_t test_state = 0;  // 0=前进, 1=后退
+static float start_distance = 0.0f;
 
 /* USER CODE END 0 */
 
@@ -153,10 +154,11 @@ can_filter_init();
     static uint32_t last_time = 0;
     static uint8_t demo_state = 0;
     uint32_t current_time = HAL_GetTick();
-    */+
+    */
+
      if (pid_flag)
       {
-        pid_flag = 0;  // ← 关键：清除标志位
+        pid_flag = 0;  //清除标志位
         
         // 在主循环中进行PID计算
         for (int i = 0; i < 4; i++) 
@@ -167,6 +169,34 @@ can_filter_init();
             }
         }
     }
+    float distance = mecanum.current_pos.distance;
+     float moved_distance = distance - start_distance;
+
+     if (test_state == 0) {  // 前进状态
+        if (moved_distance < 1.0f) {
+            mecanum_move_forward(&mecanum, 800.0f);
+        } else {
+            // 前进1米后，准备后退
+            test_state = 1;
+            start_distance = distance;  // 重新记录起点
+        }
+    } else {  // 后退状态
+        if (fabsf(moved_distance) < 1.0f) {  // 用绝对值
+            mecanum_move_backward(&mecanum, 800.0f);
+        } else {
+            // 后退1米后，准备前进
+            test_state = 0;
+            start_distance = distance;  // 重新记录起点
+        }
+    }
+
+     /*
+    if(distance < 1.0f)
+    {
+        mecanum_move_backward(&mecanum, 800.0f);
+    }
+*/
+    /*
  uint32_t now = HAL_GetTick();
     if (now - last_switch_time >= 5000)
     {
@@ -195,7 +225,7 @@ can_filter_init();
             mecanum_rotate_right(&mecanum, 600.0f); // 右转
             break;
     }
-		ai++;
+		*/
       
     // 发送电机控制指令（从定时器中断移回主循环）
    
@@ -288,17 +318,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (htim == &htim2)
     {
        timer_count++; // 计数器，用于调试观察
-    
+       pid_flag = 1; // 设置PID计算标志
     for (int i = 0; i < 4; i++) 
     {
         motor_pid[i].target = mecanum.wheel_speed[i];
-        pid_flag = 1; // 设置PID计算标志
         const motor_measure_t *motor_data = get_chassis_motor_measure_point(i);
-        /*
-        if (motor_data) {
-            motor_pid[i].f_cal_pid(&motor_pid[i], motor_data->speed_rpm); //这句有问题，不能放中断回调里
-        }
-        */
+        
+        
+            //motor_pid[i].f_cal_pid(&motor_pid[i], motor_data->speed_rpm); //这句有问题，不能放中断回调里
+        
     }
     CAN_cmd_chassis(motor_pid[0].output, motor_pid[1].output, motor_pid[2].output, motor_pid[3].output);
     // 不在中断里发送CAN指令，移到主循环

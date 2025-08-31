@@ -100,7 +100,7 @@ void mecanum_ecd_distance(mecanum_control_t *mecanum_control)
     {
         return;
     }
-    float wheel_distance_sum = 0.0f;
+  float abs_wheel_distance_sum = 0.0f;
     for(int i=0; i<4; i++)//四个电机处理
     {
         const motor_measure_t *motor_data = get_chassis_motor_measure_point(i);
@@ -134,13 +134,13 @@ void mecanum_ecd_distance(mecanum_control_t *mecanum_control)
         // 计算实际轮子移动距离 (米)
         // M2006距离计算: (编码器变化量 / 编码器分辨率) / 减速比 * 轮子周长
         float wheel_distance = ((float)delta_ecd / M2006_ENCODER_RES) / M2006_GEAR_RATIO * WHEEL_CIRCUMFERENCE;
-        wheel_distance_sum += wheel_distance;
+        abs_wheel_distance_sum += fabsf(wheel_distance);
         mecanum_control->total_wheel_distance[i] += wheel_distance;
 
     }
     
     // 计算底盘平均移动距离
-    float chassis_distance = wheel_distance_sum / 4.0f;
+    float chassis_distance = abs_wheel_distance_sum / 4.0f;
     
     // 累加到总距离
     mecanum_control->current_pos.distance += chassis_distance; //更新到麦轮结构体
