@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\can.dir/objects.a
-C:\VSCODE~1\X86_64~1.0-R\mingw64\bin\ar.exe qc CMakeFiles\can.dir/objects.a @CMakeFiles\can.dir\objects1.rsp
-C:\VSCODE~1\X86_64~1.0-R\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\can.dir/objects.a -Wl,--no-whole-archive -o can.exe -Wl,--out-implib,libcan.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\can.dir\linkLibs.rsp

@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"D:/GIT/NO-BUG-QJ/build/cmake_install.cmake",
-		"D:/GIT/NO-BUG-QJ/build/cmake/stm32cubemx/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
