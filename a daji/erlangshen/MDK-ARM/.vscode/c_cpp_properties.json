@@ -3,18 +3,18 @@
         {
             "name": "erlangshen",
             "includePath": [
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Inc",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Drivers\\CMSIS\\Include",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\applications",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\bsp",
-                "D:\\kile5\\ARM\\ARMCC\\include",
-                "D:\\kile5\\ARM\\ARMCC\\include\\rw",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\MDK-ARM",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Src",
-                "d:\\Download\\no-bug-qj\\no-bug-qj\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Src"
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Inc",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Drivers\\CMSIS\\Include",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\applications",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\bsp",
+                "D:\\keil5\\ARM\\ARMCC\\include",
+                "D:\\keil5\\ARM\\ARMCC\\include\\rw",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\MDK-ARM",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Src",
+                "d:\\NO-BUG-QJ\\a daji\\erlangshen\\Drivers\\STM32F4xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

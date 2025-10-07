@@ -1,7 +1,7 @@
 erlangshen\mecanum_control.o: ..\applications\mecanum_control.c
 erlangshen\mecanum_control.o: ..\applications\mecanum_control.h
 erlangshen\mecanum_control.o: ..\applications\pid.h
-erlangshen\mecanum_control.o: D:\kile5\ARM\ARMCC\Bin\..\include\stdint.h
+erlangshen\mecanum_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 erlangshen\mecanum_control.o: ..\applications\struct_typedef.h
 erlangshen\mecanum_control.o: ..\applications\CAN_receive.h
 erlangshen\mecanum_control.o: ../Inc/main.h
@@ -19,7 +19,7 @@ erlangshen\mecanum_control.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 erlangshen\mecanum_control.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-erlangshen\mecanum_control.o: D:\kile5\ARM\ARMCC\Bin\..\include\stddef.h
+erlangshen\mecanum_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -36,7 +36,7 @@ erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 erlangshen\mecanum_control.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-erlangshen\mecanum_control.o: D:\kile5\ARM\ARMCC\Bin\..\include\math.h
-erlangshen\mecanum_control.o: D:\kile5\ARM\ARMCC\Bin\..\include\stdlib.h
+erlangshen\mecanum_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
+erlangshen\mecanum_control.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 erlangshen\mecanum_control.o: ..\applications\pid.h
 erlangshen\mecanum_control.o: ..\applications\robot_config.h

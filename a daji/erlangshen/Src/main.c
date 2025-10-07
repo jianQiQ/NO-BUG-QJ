@@ -201,129 +201,242 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//	HAL_Delay(1000);
-//	hwt101_restart(&huart7);
-//  set_target_move_to_target(&mecanum,430.0f,0.0f,t1,4000.0f,1,1);
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,0.0f,-800.0f*1.03f,t1,4000.0f,1,1); //到达取货站
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,0.0f,-340.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,624.5f,0.0f,t1,3000.0f,1,1); //避障起点
-//  HAL_Delay(10);
-  move_x(&mecanum,t1,1000.0f);
-  HAL_Delay(250);
-  move_y(&mecanum,t1,1000.0f);
-  HAL_Delay(250);
-  set_target_move_to_target(&mecanum,200,0.0f,t1,1000.0f,0,1); //第一个货站
-while (1)
-{
-  UART_SendData(&huart3, gd_l,gd_r,1);
-  processReceivedData();
-  HAL_Delay(50);
-  if(recivedata)
-  {
-    // 处理接收到的数据
-    gd_l=0;
-    gd_r=0;
-    break;
-  }
-}
+	  
+	  
+	  // ========== 镜像场地运动代码 ==========
+// 起点：右上角 → 终点：右上角
 
+HAL_Delay(1000);
 
+// ========== 1. 起点到取货站 ==========
+set_target_move_to_target(&mecanum, 430.0f, 0.0f, t1, 4000.0f, 1, 1);        // 前进430mm
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 0.0f, 800.0f*1.03f, t1, 4000.0f, 1, 1); // 左移824mm（原来是右移-800）
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 0.0f, 340.0f, t1, 3000.0f, 1, 1);        // 左移340mm（原来是右移-340）
+HAL_Delay(10);
 
-  set_target_move_to_target(&mecanum,461.0f,0.0f,t1,3000.0f,1,1);  //避障起点
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,0.0f,230.0f,t1,3000.0f,1,1);  //左移
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,884.0f,0.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,0.0f,-155.0f+30.0f,t1,3000.0f,1,1);  //右移,开始是225，多了
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,126.0f,0.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
+// ========== 2. 避障区域 ==========
+set_target_move_to_target(&mecanum, 624.5f, 0.0f, t1, 3000.0f, 1, 1);        // 避障起点，前进624.5mm
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 0.0f, -230.0f, t1, 3000.0f, 1, 1);       // 右移230mm（原来是左移）
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 884.0f, 0.0f, t1, 3000.0f, 1, 1);        // 前进884mm
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 0.0f, 155.0f-30.0f, t1, 3000.0f, 1, 1);  // 左移125mm（原来是右移-155+30）
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 126.0f, 0.0f, t1, 3000.0f, 1, 1);        // 前进126mm
+HAL_Delay(10);
+
+// ========== 3. 货站1（镜像后的第一个货站）==========
+move_x(&mecanum, t1, 1000.0f);
+HAL_Delay(250);
+move_y(&mecanum, t1, 1000.0f);
+HAL_Delay(250);
+set_target_move_to_target(&mecanum, 232.0f-2.0f, 0.0f, t1, 1000.0f, 0, 1);   // 第一个货站
+HAL_Delay(100);
+
+// ========== 4. 前往货站2 ==========
+set_target_move_to_target(&mecanum, 810.0f, 0.0f, t1, 3000.0f, 1, 1);        // 前进810mm
+HAL_Delay(10);
+
+move_angle(&mecanum, t4);  // 第一次转弯（镜像：原t2变为t4，假设是-90度）
+HAL_Delay(500);
+
+// ========== 5. 货站2 ==========
+set_target_move_to_target(&mecanum, 69.5f, 0.0f, t4, 3000.0f, 1, 1);
+HAL_Delay(10);
+move_x(&mecanum, t4, 800.0f);
+HAL_Delay(500);
+move_y(&mecanum, t4, 800.0f);
+HAL_Delay(500);
+set_target_move_to_target(&mecanum, 232.0f-2.0f, 0.0f, t4, 800.0f, 0, 1);   // 第二个货站
+HAL_Delay(100);
+
+// ========== 6. 货站3 ==========
+set_target_move_to_target(&mecanum, 470.0f, 0.0f, t4, 3000.0f, 0, 0);
+HAL_Delay(10);
+move_x(&mecanum, t4, 800.0f);
+HAL_Delay(500);
+move_y(&mecanum, t4, 800.0f);
+HAL_Delay(500);
+set_target_move_to_target(&mecanum, 232.0f-2.0f, 0.0f, t4, 3000.0f, 0, 1);  // 第三个货站
+HAL_Delay(100);
+
+// ========== 7. 前往跷跷板 ==========
+set_target_move_to_target(&mecanum, 400.0f, 0.0f, t4, 3000.0f, 1, 1);
+HAL_Delay(10);
+move_angle(&mecanum, t2);  // 第二次转弯（镜像：原t3变为t5）
+HAL_Delay(500);
+
+// ========== 8. 上跷跷板 ==========
+set_target_move_to_target_up(&mecanum, 1415.0f+70.0f, 0.0f, t2, 4000.0f, 1, 1); // 上跷跷板
+HAL_Delay(10);
+
+hwt101_restart(&huart7); // 重启hwt101（内部有HAL_Delay），注意角度
+	
+// ========== 9. 过跷跷板后 ==========
+set_target_move_to_target(&mecanum, 515.0f, 0.0f, t1, 3000.0f, 1, 1);
+HAL_Delay(10);
+	
+move_angle(&mecanum, t4);  // 第三次转弯（镜像方向）
+HAL_Delay(500);
+
+// ========== 10. 货站4 ==========
+set_target_move_to_target(&mecanum, 450.5f, 0.0f, t4, 3000.0f, 1, 1);
+move_x(&mecanum, t4, 1000.0f);
+HAL_Delay(500);
+move_y(&mecanum, t4, 1000.0f);
+HAL_Delay(500);
+set_target_move_to_target(&mecanum, 232.0f-2.0f, 0.0f, t4, 1000.0f, 0, 1);   // 第四个货站
+HAL_Delay(100);
+
+// ========== 11. 前往货站5 ==========
+set_target_move_to_target(&mecanum, -740.0f, 0.0f, t4, 3000.0f, 1, 1);       // 后退740mm
+HAL_Delay(10);
+
+move_angle(&mecanum, t1);  // 第四次转弯（180度回正）
+HAL_Delay(500);
+
+// ========== 12. 货站5 ==========
+set_target_move_to_target(&mecanum, 253.0f, 0.0f, t1, 3000.0f, 1, 1);
+HAL_Delay(10);
+move_x(&mecanum, t1, 1000.0f);
+HAL_Delay(500);
+move_y(&mecanum, t1, 1000.0f);
+HAL_Delay(500);
+set_target_move_to_target(&mecanum, 232.0f-2.0f, 0.0f, t1, 1000.0f, 0, 1);   // 第五个货站
+HAL_Delay(100);
+
+// ========== 13. 回家 ==========
+set_target_move_to_target(&mecanum, 1420.0f, 0.0f, t1, 3000.0f, 1, 1);       // 前进1420mm回家
+HAL_Delay(10);
+set_target_move_to_target(&mecanum, 0.0f, -460.0f, t1, 3000.0f, 1, 1);       // 右移460mm（原来是左移）
+HAL_Delay(10);
+	  
+////	HAL_Delay(1000);
+////	hwt101_restart(&huart7);
+////  set_target_move_to_target(&mecanum,430.0f,0.0f,t1,4000.0f,1,1);
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,0.0f,-800.0f*1.03f,t1,4000.0f,1,1); //到达取货站
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,0.0f,-340.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,624.5f,0.0f,t1,3000.0f,1,1); //避障起点
+////  HAL_Delay(10);
 //  move_x(&mecanum,t1,1000.0f);
 //  HAL_Delay(250);
 //  move_y(&mecanum,t1,1000.0f);
 //  HAL_Delay(250);
-//  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t1,1000.0f,0,1);  //第二个货站
-//	HAL_Delay(100);
+//  set_target_move_to_target(&mecanum,200,0.0f,t1,1000.0f,0,1); //第一个货站
+//while (1)
+//{
+//  UART_SendData(&huart3, gd_l,gd_r,1);
+//  processReceivedData();
+//  HAL_Delay(50);
+//  if(recivedata)
+//  {
+//    // 处理接收到的数据
+//    gd_l=0;
+//    gd_r=0;
+//    break;
+//  }
+//}
 
-//	
-//  set_target_move_to_target(&mecanum,810.0f,0.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
-//	
-//  move_angle(&mecanum,t2);  //第一次转弯
-//  HAL_Delay(500);
-//	
-//  set_target_move_to_target(&mecanum,69.5f,0.0f,t2,3000.0f,1,1);
-//  HAL_Delay(10);
-//  move_x(&mecanum,t2,800.0f);
-//  HAL_Delay(500);
-//  move_y(&mecanum,t2,800.0f);
-//  HAL_Delay(500);
-//  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,800.0f,0,1); //第三个货站
-//	HAL_Delay(100);
 
-//	
-//  set_target_move_to_target(&mecanum,470.0f,0.0f,t2,3000.0f,0,0);
-//  HAL_Delay(10);
-//  move_x(&mecanum,t2,800.0f);
-//  HAL_Delay(500);
-//  move_y(&mecanum,t2,800.0f);
-//  HAL_Delay(500);
-//  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,3000.0f,0,1); //第四个货站
-//	HAL_Delay(100);
 
-//	
-//  
-//  set_target_move_to_target(&mecanum,400.0f,0.0f,t2,3000.0f,1,1);
-//  HAL_Delay(10);
-//  move_angle(&mecanum,t3);  //第二次转弯
-//  HAL_Delay(500);
+//  set_target_move_to_target(&mecanum,461.0f,0.0f,t1,3000.0f,1,1);  //避障起点
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,0.0f,230.0f,t1,3000.0f,1,1);  //左移
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,884.0f,0.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,0.0f,-155.0f+30.0f,t1,3000.0f,1,1);  //右移,开始是225，多了
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,126.0f,0.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////  move_x(&mecanum,t1,1000.0f);
+////  HAL_Delay(250);
+////  move_y(&mecanum,t1,1000.0f);
+////  HAL_Delay(250);
+////  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t1,1000.0f,0,1);  //第二个货站
+////	HAL_Delay(100);
 
-//  set_target_move_to_target_up(&mecanum,1415.0f+70.0f,0.0f,t3,4000.0f,1,1); //上跷跷板
-//  HAL_Delay(10);
-//	
-//  hwt101_restart(&huart7); //重启hwt101(内部有haldelay)，注意角度
-//	
-//  set_target_move_to_target(&mecanum,515.0f,0.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
-//	
-//  move_angle(&mecanum,t2);  //第三次转弯
-//  HAL_Delay(500);
-//  
-//  set_target_move_to_target(&mecanum,450.5f,0.0f,t2,3000.0f,1,1);
-//  move_x(&mecanum,t2,1000.0f);
-//  HAL_Delay(500);
-//  move_y(&mecanum,t2,1000.0f);
-//  HAL_Delay(500);
-//  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,1000.0f,0,1);//第五个货站
-//	HAL_Delay(100);
+////	
+////  set_target_move_to_target(&mecanum,810.0f,0.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////	
+////  move_angle(&mecanum,t2);  //第一次转弯
+////  HAL_Delay(500);
+////	
+////  set_target_move_to_target(&mecanum,69.5f,0.0f,t2,3000.0f,1,1);
+////  HAL_Delay(10);
+////  move_x(&mecanum,t2,800.0f);
+////  HAL_Delay(500);
+////  move_y(&mecanum,t2,800.0f);
+////  HAL_Delay(500);
+////  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,800.0f,0,1); //第三个货站
+////	HAL_Delay(100);
 
-//	
-//  set_target_move_to_target(&mecanum,-740.0f,0.0f,t2,3000.0f,1,1);
-//  HAL_Delay(10);
+////	
+////  set_target_move_to_target(&mecanum,470.0f,0.0f,t2,3000.0f,0,0);
+////  HAL_Delay(10);
+////  move_x(&mecanum,t2,800.0f);
+////  HAL_Delay(500);
+////  move_y(&mecanum,t2,800.0f);
+////  HAL_Delay(500);
+////  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,3000.0f,0,1); //第四个货站
+////	HAL_Delay(100);
 
-//  move_angle(&mecanum,t1);  //第四次转弯 180度
-//  HAL_Delay(500);
+////	
+////  
+////  set_target_move_to_target(&mecanum,400.0f,0.0f,t2,3000.0f,1,1);
+////  HAL_Delay(10);
+////  move_angle(&mecanum,t3);  //第二次转弯
+////  HAL_Delay(500);
 
-//  set_target_move_to_target(&mecanum,253.0f,0.0f,t1,3000.0f,1,1);
-//  HAL_Delay(10);
-//  move_x(&mecanum,t1,1000.0f);
-//  HAL_Delay(500);
-//  move_y(&mecanum,t1,1000.0f);
-//  HAL_Delay(500);
-//  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t1,1000.0f,0,1); //第六个货站
-//  HAL_Delay(100);
+////  set_target_move_to_target_up(&mecanum,1415.0f+70.0f,0.0f,t3,4000.0f,1,1); //上跷跷板
+////  HAL_Delay(10);
+////	
+////  hwt101_restart(&huart7); //重启hwt101(内部有haldelay)，注意角度
+////	
+////  set_target_move_to_target(&mecanum,515.0f,0.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////	
+////  move_angle(&mecanum,t2);  //第三次转弯
+////  HAL_Delay(500);
+////  
+////  set_target_move_to_target(&mecanum,450.5f,0.0f,t2,3000.0f,1,1);
+////  move_x(&mecanum,t2,1000.0f);
+////  HAL_Delay(500);
+////  move_y(&mecanum,t2,1000.0f);
+////  HAL_Delay(500);
+////  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t2,1000.0f,0,1);//第五个货站
+////	HAL_Delay(100);
 
-//	
-//  set_target_move_to_target(&mecanum,1420.0f,0.0f,t1,3000.0f,1,1); //回家
-//  HAL_Delay(10);
-//  set_target_move_to_target(&mecanum,0.0f,460.0f,t1,3000.0f,1,1); //左移
-//  HAL_Delay(10);
-//  
-//	while(1){}
+////	
+////  set_target_move_to_target(&mecanum,-740.0f,0.0f,t2,3000.0f,1,1);
+////  HAL_Delay(10);
+
+////  move_angle(&mecanum,t1);  //第四次转弯 180度
+////  HAL_Delay(500);
+
+////  set_target_move_to_target(&mecanum,253.0f,0.0f,t1,3000.0f,1,1);
+////  HAL_Delay(10);
+////  move_x(&mecanum,t1,1000.0f);
+////  HAL_Delay(500);
+////  move_y(&mecanum,t1,1000.0f);
+////  HAL_Delay(500);
+////  set_target_move_to_target(&mecanum,232.0f-2.0f,0.0f,t1,1000.0f,0,1); //第六个货站
+////  HAL_Delay(100);
+
+////	
+////  set_target_move_to_target(&mecanum,1420.0f,0.0f,t1,3000.0f,1,1); //回家
+////  HAL_Delay(10);
+////  set_target_move_to_target(&mecanum,0.0f,460.0f,t1,3000.0f,1,1); //左移
+////  HAL_Delay(10);
+////  
+////	while(1){}
 
 
 

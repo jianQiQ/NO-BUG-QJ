@@ -8,7 +8,7 @@ erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 erlangshen\tim.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 erlangshen\tim.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f427xx.h
 erlangshen\tim.o: ../Drivers/CMSIS/Include/core_cm4.h
-erlangshen\tim.o: D:\kile5\ARM\ARMCC\Bin\..\include\stdint.h
+erlangshen\tim.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 erlangshen\tim.o: ../Drivers/CMSIS/Include/cmsis_version.h
 erlangshen\tim.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 erlangshen\tim.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -16,7 +16,7 @@ erlangshen\tim.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 erlangshen\tim.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-erlangshen\tim.o: D:\kile5\ARM\ARMCC\Bin\..\include\stddef.h
+erlangshen\tim.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 erlangshen\tim.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h

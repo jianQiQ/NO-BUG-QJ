@@ -1,7 +1,7 @@
 erlangshen\can_receive.o: ..\applications\CAN_receive.c
 erlangshen\can_receive.o: ..\applications\CAN_receive.h
 erlangshen\can_receive.o: ..\applications\struct_typedef.h
-erlangshen\can_receive.o: D:\kile5\ARM\ARMCC\Bin\..\include\stdint.h
+erlangshen\can_receive.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 erlangshen\can_receive.o: ..\applications\mecanum_control.h
 erlangshen\can_receive.o: ..\applications\pid.h
 erlangshen\can_receive.o: ../Inc/main.h
@@ -19,7 +19,7 @@ erlangshen\can_receive.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 erlangshen\can_receive.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-erlangshen\can_receive.o: D:\kile5\ARM\ARMCC\Bin\..\include\stddef.h
+erlangshen\can_receive.o: D:\keil5\ARM\ARMCC\Bin\..\include\stddef.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -37,6 +37,6 @@ erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 erlangshen\can_receive.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 erlangshen\can_receive.o: ..\applications\robot_config.h
-erlangshen\can_receive.o: D:\kile5\ARM\ARMCC\Bin\..\include\math.h
-erlangshen\can_receive.o: D:\kile5\ARM\ARMCC\Bin\..\include\stdlib.h
+erlangshen\can_receive.o: D:\keil5\ARM\ARMCC\Bin\..\include\math.h
+erlangshen\can_receive.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 erlangshen\can_receive.o: ../Inc/can.h
