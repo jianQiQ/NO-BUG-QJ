@@ -1,4 +1,5 @@
-#line 1 "D:\\GIT\\NO-BUG-QJ\\arduino_q\\slide_servo.cpp"
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\slide_servo.cpp"
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\slide_servo.cpp"
 #include "slide_servo.h"
 
 Servo zx20s_7;
@@ -6,15 +7,15 @@ Servo zx20s_8;
 Servo zx20s_9;
 
 int pos = 0;
-int zx20s_7_initialAngle = 90;
-int zx20s_7_moveAngle = 20;
-int zx20s_7_currentAngle = 90;
-int zx20s_8_initialAngle = 165;
-int zx20s_8_moveAngle = 95;
-int zx20s_8_currentAngle = 165;
-int zx20s_9_initialAngle = 35;
-int zx20s_9_moveAngle = 115;
-int zx20s_9_currentAngle = 35;
+int zx20s_7_initialAngle = 88;
+int zx20s_7_moveAngle = 10;
+int zx20s_7_currentAngle = 88;
+int zx20s_8_initialAngle = 58;
+int zx20s_8_moveAngle = 87 ;
+int zx20s_8_currentAngle = 58;
+int zx20s_9_initialAngle = 160;
+int zx20s_9_moveAngle = 85;
+int zx20s_9_currentAngle = 160;
 int direction = 0;
 
 void zx20s_7ChuShiHua() {
@@ -26,13 +27,13 @@ void zx20s_7ChuShiHua() {
 }
 
 void zx20s_7Left() {
-  zx20s_7_currentAngle = zx20s_7_currentAngle + zx20s_7_moveAngle;
+  zx20s_7_currentAngle = zx20s_7_currentAngle - zx20s_7_moveAngle;
   if (zx20s_7_currentAngle > 180) zx20s_7_currentAngle = 180;
   zx20s_7.write(zx20s_7_currentAngle);
 }
 
 void zx20s_7Right() {
-  zx20s_7_currentAngle = zx20s_7_currentAngle - zx20s_7_moveAngle;
+  zx20s_7_currentAngle = zx20s_7_currentAngle + zx20s_7_moveAngle;
   if (zx20s_7_currentAngle < 0) zx20s_7_currentAngle = 0;
   zx20s_7.write(zx20s_7_currentAngle);
   Serial.println("右翻 ");
@@ -57,7 +58,7 @@ void zx20s_8Left() {
   zx20s_8_currentAngle = zx20s_8_currentAngle - zx20s_8_moveAngle;
    
   zx20s_8.write(zx20s_8_currentAngle);
-  for (pos = 180; pos >= zx20s_8_currentAngle; pos -= 1) {
+  for (pos = 180; pos >= zx20s_8_currentAngle; pos += 1) {
     zx20s_8.write(pos);
     delay(10);
   }
@@ -82,7 +83,7 @@ void zx20s_9Right() {
   zx20s_9_currentAngle = zx20s_9_currentAngle + zx20s_9_moveAngle;
   if (zx20s_9_currentAngle > 180) zx20s_9_currentAngle = 180;
   zx20s_9.write(zx20s_9_currentAngle);
-  for (pos = 0; pos <= zx20s_9_currentAngle; pos += 1) {
+  for (pos = 0; pos <= zx20s_9_currentAngle; pos -= 1) {
     zx20s_9.write(pos);
     delay(15);
   }

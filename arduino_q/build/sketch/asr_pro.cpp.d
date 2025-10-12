@@ -1,6 +1,6 @@
-D:\GIT\no-bug\arduino_q\build\sketch\tca9548a.cpp.o: \
- D:\GIT\no-bug\arduino_q\build\sketch\tca9548a.cpp \
- D:\GIT\no-bug\arduino_q\build\sketch\tca9548a.h \
+D:\GIT\no-bug\arduino_q\build\sketch\asr_pro.cpp.o: \
+ D:\GIT\no-bug\arduino_q\build\sketch\asr_pro.cpp \
+ D:\GIT\no-bug\arduino_q\build\sketch\asr_pro.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/binary.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/WCharacter.h \
@@ -12,5 +12,5 @@ D:\GIT\no-bug\arduino_q\build\sketch\tca9548a.cpp.o: \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/USBAPI.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\variants\standard/pins_arduino.h \
- C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\Wire\src/Wire.h \
+ C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SoftwareSerial\src/SoftwareSerial.h \
  C:\Users\qj\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Stream.h
