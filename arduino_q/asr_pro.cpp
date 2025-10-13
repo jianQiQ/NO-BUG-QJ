@@ -1,3 +1,4 @@
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\asr_pro.cpp"
 #include "asr_pro.h"
 #include <SoftwareSerial.h>
 

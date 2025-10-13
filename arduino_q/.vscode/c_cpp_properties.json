@@ -1,3 +1,4 @@
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\.vscode\\c_cpp_properties.json"
 {
   "configurations": [
     {
@@ -36,9 +37,9 @@
         "-IC:\\Users\\qj\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SoftwareSerial\\src",
         "-IC:\\Users\\qj\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Servo\\src",
         "-IC:\\Users\\qj\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SPI\\src",
-        "D:\\GIT\\no-bug\\arduino_q\\build\\sketch\\asr_pro.cpp",
+        "D:\\GIT\\no-bug\\arduino_q\\build\\sketch\\color_sensor_servo.cpp",
         "-o",
-        "D:\\GIT\\no-bug\\arduino_q\\build\\sketch\\asr_pro.cpp.o"
+        "D:\\GIT\\no-bug\\arduino_q\\build\\sketch\\color_sensor_servo.cpp.o"
       ],
       "defines": [
         "F_CPU=16000000L",

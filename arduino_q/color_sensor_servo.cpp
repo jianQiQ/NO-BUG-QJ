@@ -1,3 +1,4 @@
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\color_sensor_servo.cpp"
 #include "color_sensor_servo.h"
 #include "tca9548a.h"
 
@@ -14,9 +15,9 @@ const int ANGLE_STEP = 1;
 AngleChannelMap angleMaps[] = {
   {0,    0, 5},
   {47,   1, 6},
-  {90,   2, 7},
-  {130,  3, 8},
-  {175,  4, 9}
+  {85,   2, 7},
+  {115,  3, 8},
+  {155,  4, 9}
 };
 const int ANGLE_MAP_COUNT = sizeof(angleMaps) / sizeof(angleMaps[0]);
 
@@ -53,13 +54,6 @@ void servo270Write(int angle) {
   
   // 发送脉宽信号
   sensorServo.writeMicroseconds(pulseWidth);
-  
-  // 调试输出
-  Serial.print(F("Servo270: "));
-  Serial.print(angle);
-  Serial.print(F("° → Pulse: "));
-  Serial.print(pulseWidth);
-  Serial.println(F("μs"));
 }
 
 // ✅ 初始化：使用270度函数
@@ -164,31 +158,209 @@ void readHSL(int hsl[3], int sensorNum) {
 }
 
 const char* detectColorSensor1() {
-  int rgb[3];
-  readRGB(rgb, 1);
+  int rgb[3] = {0};
+  int hsl[3] = {0};
+  int r_sum = 0, g_sum = 0, b_sum = 0;
+  int h_sum = 0, s_sum = 0, l_sum = 0;
+  int SAMPLE_COUNT = 3;
+  int r = 0, g = 0, b = 0;
   
-  int r = rgb[0], g = rgb[1], b = rgb[2];
+  for (int i = 0; i < SAMPLE_COUNT; i++) {
+    readRGB(rgb, 1);
+    readHSL(hsl, 1);
+    r = rgb[0];
+    g = rgb[1];
+    b = rgb[2];
+    Serial.print("Sensor 1 | RGB: ");
+    Serial.print(r); Serial.print(",");
+    Serial.print(g); Serial.print(",");
+    Serial.print(b); Serial.print(" | HSL: ");
+    Serial.print(hsl[0]); Serial.print(",");
+    Serial.print(hsl[1]); Serial.print(",");
+    Serial.println(hsl[2]);
+    
+    r = constrain(rgb[0] + 0, 0, 255);
+    g = constrain(rgb[1] + 0, 0, 255);
+    b = constrain(rgb[2] + 0, 0, 255);
+    r_sum += r;
+    g_sum += g;
+    b_sum += b;
+    h_sum += hsl[0];
+    s_sum += hsl[1];
+    l_sum += hsl[2];
+    delay(10);
+  }
+
+  r = r_sum / SAMPLE_COUNT;
+  g = g_sum / SAMPLE_COUNT;
+  b = b_sum / SAMPLE_COUNT;
+  hsl[0] = h_sum / SAMPLE_COUNT;
+  hsl[1] = s_sum / SAMPLE_COUNT;
+  hsl[2] = l_sum / SAMPLE_COUNT;
   
-  if (r > 200 && g < 100 && b < 100) return "Red";
-  if (r > 200 && g > 150 && b < 100) return "Yellow";
-  if (r < 100 && g < 100 && b > 150) return "Blue";
-  if (r < 150 && g > 150 && b < 100) return "Green";
-  if (r > 200 && g > 200 && b > 200) return "White";
+  Serial.print("Sensor 1 | RGB: ");
+  Serial.print(r); Serial.print(",");
+  Serial.print(g); Serial.print(",");
+  Serial.print(b); Serial.print(" | HSL: ");
+  Serial.print(hsl[0]); Serial.print(",");
+  Serial.print(hsl[1]); Serial.print(",");
+  Serial.println(hsl[2]);
+
+// 1. 判断黄色（传感器1的阈值）
+  if (
+    r >= 200 && r <= 255 &&
+    g >= 170 && g <= 255 &&
+    b >= 0 && b <= 255 &&
+    hsl[0] >= 30 && hsl[0] <= 225 &&
+    hsl[1] >= 0 && hsl[1] <= 240 &&
+    hsl[2] >= 130 && hsl[2] <= 245 &&
+    hsl[0] < hsl[1] && hsl[1] > hsl[2]) {
+   return "Yellow";
+   }
+
+  else if (r >=190 && r <=255 && 
+      g >=190 && g <=255 && 
+      b >=190 && b <=255 &&
+      hsl[0] >=0 && hsl[0] <=225 &&
+      hsl[1] >=0 && hsl[1] <=220 &&
+      hsl[2] >=180 && hsl[2] <=240) {
+        return "White";
+      }
+  
+  // 3. 判断绿色（传感器1的阈值）
+  else if (r >= 45 && r <= 255 &&
+    g >= 150 && g <= 255 &&
+    b >= 120 && b <= 255 &&
+    hsl[0] >= 100 && hsl[0] <= 130 &&
+    hsl[1] >= 75 && hsl[1] <= 240 &&
+    hsl[2] >= 100 && hsl[2] <= 200) {
+   return "Green";
+}
+  
+  // 4. 判断红色（传感器1的阈值）
+  else if (r >= 150 && r <= 255 &&
+    g >= 0 && g <= 90 &&
+    b >= 0 && b <= 130 &&
+    hsl[0] >= 0 && hsl[0] <= 50 &&
+    hsl[1] >= 80 && hsl[1] <= 230 &&
+    hsl[2] >= 70 && hsl[2] <= 150){
+    return "Red";
+    }
+  
+  // 5. 判断蓝色（传感器1的阈值）
+  else if(r >= 0 && r <= 90 &&
+      g >= 20 && g <= 125 &&
+      b >= 40 && b <= 150 &&
+      hsl[0] >= 130 && hsl[0] <= 180 &&
+      hsl[1] >= 20 && hsl[1] <= 245 &&
+      hsl[2] >= 30 && hsl[2] <= 105) {
+        return "Blue";
+          }
   
   return "Unknown";
 }
 
 const char* detectColorSensor2() {
-  int rgb[3];
-  readRGB(rgb, 2);
+  int rgb[3] = {0};
+  int hsl[3] = {0};
+  int r_sum = 0, g_sum = 0, b_sum = 0;
+  int h_sum = 0, s_sum = 0, l_sum = 0;
+  int SAMPLE_COUNT = 3;
+  int r = 0, g = 0, b = 0;
   
-  int r = rgb[0], g = rgb[1], b = rgb[2];
+  for (int i = 0; i < SAMPLE_COUNT; i++){
+    readRGB(rgb, 2);
+    readHSL(hsl, 2);
+
+    r = rgb[0];
+    g = rgb[1];
+    b = rgb[2];
+    Serial.print("Sensor 2 | RGB: ");
+    Serial.print(r); Serial.print(",");
+    Serial.print(g); Serial.print(",");
+    Serial.print(b); Serial.print(" | HSL: ");
+    Serial.print(hsl[0]); Serial.print(",");
+    Serial.print(hsl[1]); Serial.print(",");
+    Serial.println(hsl[2]);
+
+    r = constrain(rgb[0] + 0, 0, 255);
+    g = constrain(rgb[1] + 0, 0, 255);
+    b = constrain(rgb[2] + 0, 0, 255);
+
+    r_sum += r;
+    g_sum += g;
+    b_sum += b;
+    h_sum += hsl[0];
+    s_sum += hsl[1];
+    l_sum += hsl[2];
+    delay(10);
+  }
+
+  r = r_sum / SAMPLE_COUNT;
+  g = g_sum / SAMPLE_COUNT;
+  b = b_sum / SAMPLE_COUNT;
+  hsl[0] = h_sum / SAMPLE_COUNT;
+  hsl[1] = s_sum / SAMPLE_COUNT;
+  hsl[2] = l_sum / SAMPLE_COUNT;
+
+  Serial.print("Sensor 2 | RGB: ");
+  Serial.print(r); Serial.print(",");
+  Serial.print(g); Serial.print(",");
+  Serial.print(b); Serial.print(" | HSL: ");
+  Serial.print(hsl[0]); Serial.print(",");
+  Serial.print(hsl[1]); Serial.print(",");
+  Serial.println(hsl[2]);
+
+ 
+// 1. 判断黄色（传感器2的阈值）
+  if (r >= 160 && r <= 255 &&
+    g >= 130 && g <= 255 &&
+    b >= 0 && b <= 255 &&
+    hsl[0] >= 10 && hsl[0] <= 215 &&
+    hsl[1] >= 50 && hsl[1] <= 230 &&
+    hsl[2] >= 105 && hsl[2] <= 245 &&
+    hsl[0] < hsl[1]) {
+   return "Yellow";
+   }
+  else if (r >=140 && r <=255 && 
+      g >=160 && g <=255 && b >=160 && b <=255 &&
+      hsl[0] >=0 && hsl[0] <=230 &&
+      hsl[1] >=0 && hsl[1] <=200 &&
+      hsl[2] >=145 && hsl[2] <=240) {
+        return "White";
+    }
   
-  if (r > 200 && g < 100 && b < 100) return "Red";
-  if (r > 200 && g > 150 && b < 100) return "Yellow";
-  if (r < 100 && g < 100 && b > 150) return "Blue";
-  if (r < 150 && g > 150 && b < 100) return "Green";
-  if (r > 200 && g > 200 && b > 200) return "White";
+// 3. 判断绿色（传感器2的阈值）
+  else if (r >= 50 && r <= 150 &&
+    g >= 110 && g <= 255 &&
+    b >= 80 && b <= 255 &&
+    hsl[0] >= 110 && hsl[0] <= 130 &&
+    hsl[1] >= 55 && hsl[1] <= 225 &&
+    hsl[2] >= 75 && hsl[2] <= 186) {
+  return "Green";
+   }
+  
+  // 4. 判断红色（传感器2的阈值）
+   else if (r >= 20 && r <= 255 &&
+    g >= 0 && g <= 230 &&
+    b >= 0 && b <= 255 &&
+    hsl[0] >= 0 && hsl[0] <= 240 &&
+    hsl[1] >= 70 && hsl[1] <= 240 &&
+    hsl[2] >= 55 && hsl[2] <= 190){
+    return "Red";
+    }
+  
+  // 5. 判断蓝色（传感器2的阈值）
+  else if(r >= 50 && r <= 145 &&
+          g >= 110 && g <= 170 &&
+          b >= 150 && b <= 220) {
+            return "Blue";
+          }
+  else if(hsl[0] >= 130 && hsl[0] <= 180 &&
+          hsl[1] >= 80 && hsl[1] <= 245 &&
+          hsl[2] >= 30 && hsl[2] <= 110) {
+            return "Blue";
+          }
   
   return "Unknown";
 }

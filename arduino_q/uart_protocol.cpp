@@ -1,3 +1,4 @@
+#line 1 "D:\\GIT\\no-bug\\arduino_q\\uart_protocol.cpp"
 #include "uart_protocol.h"
 
 uint8_t rxBuffer[7];
